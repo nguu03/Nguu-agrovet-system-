@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock - Nguu Agrovet</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+    }
+
+    header {
+      background: #176b3a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 15px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 7px;
+      background: #555;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 6px;
+      text-align: left;
+    }
+
+    th {
+      background: #176b3a;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>📦 STOCK</h1>
+  <p>Nguu Agrovet - Kwediboma</p>
+</header>
+
+<div class="container">
+
+  <button onclick="location.href='index.html'">
+    ← Rudi Dashboard
+  </button>
+
+  <h2>Bidhaa Zilizopo</h2>
+
+  <table>
+    <tr>
+      <th>Bidhaa</th>
+      <th>Kiasi</th>
+      <th>Bei ya Reja</th>
+    </tr>
+
+    <tr>
+      <td>Faru Dust</td>
+      <td>48</td>
+      <td>TSh 5,000</td>
+    </tr>
+
+    <tr>
+      <td>Duduba</td>
+      <td>100</td>
+      <td>TSh 5,000</td>
+    </tr>
+
+    <tr>
+      <td>Blitkill</td>
+      <td>50</td>
+      <td>TSh 5,000</td>
+    </tr>
+
+    <tr>
+      <td>Nuru</td>
+      <td>72</td>
+      <td>TSh 7,000</td>
+    </tr>
+
+    <tr>
+      <td>Shamba Dust</td>
+      <td>50</td>
+      <td>TSh 5,000</td>
+    </tr>
+
+  </table>
+
+</div>
+
+</body>
+</html>
