@@ -105,7 +105,59 @@
 
   </table>
 
+</div><!-- ADD PRODUCT -->
+<div style="margin:20px 0; padding:20px; background:white; border-radius:10px;">
+  <h2>➕ ADD PRODUCT</h2>
+
+  <input id="productName" type="text" placeholder="Jina la bidhaa"
+         style="width:100%; padding:12px; margin:6px 0;">
+
+  <input id="productQty" type="number" placeholder="Kiasi"
+         style="width:100%; padding:12px; margin:6px 0;">
+
+  <input id="buyPrice" type="number" placeholder="Bei ya kununua"
+         style="width:100%; padding:12px; margin:6px 0;">
+
+  <input id="sellPrice" type="number" placeholder="Bei ya reja"
+         style="width:100%; padding:12px; margin:6px 0;">
+
+  <button onclick="addProduct()"
+          style="padding:12px 20px; background:#176b3a; color:white; border:0; border-radius:6px;">
+    💾 SAVE PRODUCT
+  </button>
 </div>
+
+<script>
+function addProduct() {
+  let name = document.getElementById("productName").value;
+  let qty = document.getElementById("productQty").value;
+  let buy = document.getElementById("buyPrice").value;
+  let sell = document.getElementById("sellPrice").value;
+
+  if (name === "" || qty === "" || buy === "" || sell === "") {
+    alert("Jaza taarifa zote za bidhaa");
+    return;
+  }
+
+  let products = JSON.parse(localStorage.getItem("nguuProducts")) || [];
+
+  products.push({
+    name: name,
+    qty: qty,
+    buy: buy,
+    sell: sell
+  });
+
+  localStorage.setItem("nguuProducts", JSON.stringify(products));
+
+  alert("Bidhaa imehifadhiwa!");
+
+  document.getElementById("productName").value = "";
+  document.getElementById("productQty").value = "";
+  document.getElementById("buyPrice").value = "";
+  document.getElementById("sellPrice").value = "";
+}
+</script>
 
 </body>
 </html>
