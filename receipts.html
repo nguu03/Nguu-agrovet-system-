@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receipts - Nguu Agrovet</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+}
+
+header {
+  background: #176b3a;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  padding: 15px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #176b3a;
+  color: white;
+  margin-top: 10px;
+}
+
+.receipt {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.receipt h2 {
+  text-align: center;
+}
+
+.line {
+  border-top: 1px dashed #999;
+  margin: 15px 0;
+}
+
+.total {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🧾 RECEIPTS</h1>
+<p>Nguu Agrovet - Kwediboma</p>
+</header>
+
+<div class="container">
+
+<button onclick="location.href='index.html'">
+← Rudi Dashboard
+</button>
+
+<div class="receipt">
+
+<h2>NGUU AGROVET</h2>
+<p>Kwediboma</p>
+
+<div class="line"></div>
+
+<div id="receiptContent">
+Hakuna mauzo bado.
+</div>
+
+<div class="line"></div>
+
+<p class="total" id="grandTotal">
+Jumla: TSh 0
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function loadReceipt() {
+
+let sales =
+JSON.parse(localStorage.getItem("nguuSales")) || [];
+
+let content =
+document.getElementById("receiptContent");
+
+let total = 0;
+
+if (sales.length === 0) {
+content.innerHTML = "Hakuna mauzo bado.";
+return;
+}
+
+content.innerHTML = "";
+
+sales.forEach(function(sale) {
+
+total += Number(sale.total);
+
+let item = document.createElement("p");
+
+item.innerHTML =
+"<b>" + sale.name + "</b><br>" +
+"Kiasi: " + sale.qty +
+"<br>Jumla: TSh " +
+Number(sale.total).toLocaleString() +
+"<br><small>" + sale.date + "</small>";
+
+content.appendChild(item);
+
+content.innerHTML +=
+"<div class='line'></div>";
+
+});
+
+document.getElementById("grandTotal").innerHTML =
+"Jumla: TSh " + total.toLocaleString();
+
+}
+
+window.onload = loadReceipt;
+
+</script>
+
+</body>
+</html>
