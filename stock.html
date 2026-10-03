@@ -141,22 +141,43 @@ function addProduct() {
 
   let products = JSON.parse(localStorage.getItem("nguuProducts")) || [];
 
-  products.push({
+  let product = {
     name: name,
     qty: qty,
     buy: buy,
     sell: sell
-  });
+  };
 
+  products.push(product);
   localStorage.setItem("nguuProducts", JSON.stringify(products));
 
-  alert("Bidhaa imehifadhiwa!");
+  addProductToTable(product);
 
   document.getElementById("productName").value = "";
   document.getElementById("productQty").value = "";
   document.getElementById("buyPrice").value = "";
   document.getElementById("sellPrice").value = "";
+
+  alert("Bidhaa imehifadhiwa!");
 }
+
+function addProductToTable(product) {
+  let table = document.querySelector("table");
+  let row = table.insertRow(-1);
+
+  row.insertCell(0).innerHTML = product.name;
+  row.insertCell(1).innerHTML = product.qty;
+  row.insertCell(2).innerHTML =
+    "TSh " + Number(product.sell).toLocaleString();
+}
+
+window.onload = function() {
+  let products = JSON.parse(localStorage.getItem("nguuProducts")) || [];
+
+  products.forEach(function(product) {
+    addProductToTable(product);
+  });
+};
 </script>
 
 </body>
