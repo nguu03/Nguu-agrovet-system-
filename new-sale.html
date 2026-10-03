@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Sale - Nguu Agrovet</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+    }
+
+    header {
+      background: #176b3a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 15px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      background: #176b3a;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 6px;
+      text-align: left;
+    }
+
+    th {
+      background: #176b3a;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🛒 NEW SALE</h1>
+  <p>Nguu Agrovet - Kwediboma</p>
+</header>
+
+<div class="container">
+
+  <button onclick="location.href='index.html'">
+    ← Rudi Dashboard
+  </button>
+
+  <div class="box">
+    <h2>Chagua Bidhaa</h2>
+
+    <select id="productSelect">
+      <option value="">-- Chagua bidhaa --</option>
+    </select>
+
+    <input id="saleQty" type="number" placeholder="Kiasi kinachouzwa">
+
+    <button onclick="makeSale()">💰 SELL PRODUCT</button>
+  </div>
+
+  <h2>🧾 Mauzo</h2>
+
+  <table>
+    <tr>
+      <th>Bidhaa</th>
+      <th>Kiasi</th>
+      <th>Jumla</th>
+    </tr>
+    <tbody id="salesTable"></tbody>
+  </table>
+
+</div>
+
+<script>
+
+function loadProducts() {
+
+  let products =
+    JSON.parse(localStorage.getItem("nguuProducts")) || [];
+
+  let select = document.getElementById("productSelect");
+
+  products.forEach(function(product, index) {
+
+    let option = document.createElement("option");
+
+    option.value = index;
+
+    option.textContent =
+      product.name + " (Stock: " + product.qty + ")";
+
+    select.appendChild(option);
+
+  });
+}
+
+
+function makeSale() {
+
+  let products =
+    JSON.parse(localStorage.getItem("nguuProducts")) || [];
+
+  let index =
+    document.getElementById("productSelect").value;
+
+  let saleQty =
+    Number(document.getElementById("saleQty").value);
+
+  if (index === "" || saleQty <= 0) {
+    alert("Chagua bidhaa na weka kiasi");
+    return;
+  }
+
+  let product = products[index];
+
+  if (saleQty > Number(product.qty)) {
+    alert("Stock haitoshi!");
+    return;
+  }
+
+  product.qty =
+    Number(product.qty) - saleQty;
+
+  let total =
+    saleQty * Number(product.sell);
+
+  localStorage.setItem(
+    "nguuProducts",
+    JSON.stringify(products)
+  );
+
+  let sales =
+    JSON.parse(localStorage.getItem("nguuSales")) || [];
+
+  sales.push({
+    name: product.name,
+    qty: saleQty,
+    total: total,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem(
+    "nguuSales",
+    JSON.stringify(sales)
+  );
+
+  alert("Mauzo yamehifadhiwa!");
+
+  location.reload();
+}
+
+
+function loadSales() {
+
+  let sales =
+    JSON.parse(localStorage.getItem("nguuSales")) || [];
+
+  let table =
+    document.getElementById("salesTable");
+
+  sales.forEach(function(sale) {
+
+    let row = table.insertRow(-1);
+
+    row.insertCell(0).innerHTML = sale.name;
+    row.insertCell(1).innerHTML = sale.qty;
+    row.insertCell(2).innerHTML =
+      "TSh " + Number(sale.total).toLocaleString();
+
+  });
+}
+
+
+window.onload = function() {
+  loadProducts();
+  loadSales();
+};
+
+</script>
+
+</body>
+</html>
