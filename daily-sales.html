@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Daily Sales - Nguu Agrovet</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+}
+
+header {
+  background: #176b3a;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  padding: 15px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #176b3a;
+  color: white;
+  margin-top: 10px;
+}
+
+.box {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.total {
+  font-size: 24px;
+  font-weight: bold;
+  color: #176b3a;
+}
+
+.sale {
+  background: #f8f8f8;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border-left: 4px solid #176b3a;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📊 DAILY SALES</h1>
+<p>Nguu Agrovet - Kwediboma</p>
+</header>
+
+<div class="container">
+
+<button onclick="location.href='index.html'">
+← Rudi Dashboard
+</button>
+
+<div class="box">
+
+<h2>📅 Mauzo ya Leo</h2>
+
+<p class="total" id="dailyTotal">
+TSh 0
+</p>
+
+<div id="salesList">
+Hakuna mauzo leo.
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function loadDailySales() {
+
+let sales =
+JSON.parse(localStorage.getItem("nguuSales")) || [];
+
+let today =
+new Date().toLocaleDateString();
+
+let dailySales = sales.filter(function(sale) {
+
+let saleDate =
+new Date(sale.date).toLocaleDateString();
+
+return saleDate === today;
+
+});
+
+let total = 0;
+
+let list =
+document.getElementById("salesList");
+
+if (dailySales.length === 0) {
+
+list.innerHTML = "Hakuna mauzo leo.";
+
+document.getElementById("dailyTotal").innerHTML =
+"TSh 0";
+
+return;
+
+}
+
+list.innerHTML = "";
+
+dailySales.forEach(function(sale) {
+
+total += Number(sale.total);
+
+let div =
+document.createElement("div");
+
+div.className = "sale";
+
+div.innerHTML =
+"<b>🛒 " + sale.name + "</b><br>" +
+"Kiasi: " + sale.qty + "<br>" +
+"Jumla: TSh " +
+Number(sale.total).toLocaleString() +
+"<br>" +
+"<small>" + sale.date + "</small>";
+
+list.appendChild(div);
+
+});
+
+document.getElementById("dailyTotal").innerHTML =
+"TSh " + total.toLocaleString();
+
+}
+
+window.onload = loadDailySales;
+
+</script>
+
+</body>
+  </html>
