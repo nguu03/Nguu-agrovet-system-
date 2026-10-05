@@ -132,7 +132,36 @@ function loadProducts() {
 }
 
 
-function makeSale() {
+function updateSaleInfo() {
+
+  let products =
+    JSON.parse(localStorage.getItem("nguuProducts")) || [];
+
+  let index =
+    document.getElementById("productSelect").value;
+
+  let info =
+    document.getElementById("saleInfo");
+
+  if (index === "") {
+    info.innerHTML =
+      "Bei ya kununua: TSh 0<br>" +
+      "Bei ya reja: TSh 0<br>" +
+      "Faida: TSh 0";
+    return;
+  }
+
+  let product = products[index];
+
+  let buy = Number(product.buy);
+  let sell = Number(product.sell);
+
+  info.innerHTML =
+    "Bei ya kununua: TSh " + buy.toLocaleString() + "<br>" +
+    "Bei ya reja: TSh " + sell.toLocaleString() + "<br>" +
+    "Faida kwa bidhaa 1: TSh " +
+    (sell - buy).toLocaleString();
+}
 
   let products =
     JSON.parse(localStorage.getItem("nguuProducts")) || [];
