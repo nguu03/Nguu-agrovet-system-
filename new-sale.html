@@ -165,12 +165,16 @@ function makeSale() {
   let sales =
     JSON.parse(localStorage.getItem("nguuSales")) || [];
 
-  sales.push({
+  let profit =
+  saleQty * (Number(product.sell) - Number(product.buy));
+
+sales.push({
     name: product.name,
     qty: saleQty,
     total: total,
+    profit: profit,
     date: new Date().toLocaleString()
-  });
+});
 
   localStorage.setItem(
     "nguuSales",
