@@ -67,3 +67,62 @@ function newSale() {
         loadDailySales();
     }
 }
+// ===============================
+// NEW SALE - NGUU AGROVET
+// ===============================
+
+function newSale() {
+    const product = document.getElementById("saleProduct").value;
+    const quantity = Number(document.getElementById("saleQuantity").value);
+    const price = Number(document.getElementById("salePrice").value);
+    const cost = Number(document.getElementById("saleCost").value);
+
+    if (!product) {
+        alert("Tafadhali chagua bidhaa.");
+        return;
+    }
+
+    if (quantity <= 0) {
+        alert("Tafadhali weka quantity.");
+        return;
+    }
+
+    if (price <= 0) {
+        alert("Tafadhali weka bei ya kuuza.");
+        return;
+    }
+
+    const total = quantity * price;
+    const profit = quantity * (price - cost);
+
+    const sale = {
+        id: Date.now(),
+        product: product,
+        quantity: quantity,
+        price: price,
+        cost: cost,
+        total: total,
+        profit: profit,
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString()
+    };
+
+    let sales = JSON.parse(localStorage.getItem("sales")) || [];
+
+    sales.push(sale);
+
+    localStorage.setItem("sales", JSON.stringify(sales));
+
+    alert(
+        "SALE IMEHIFADHIWA!\n\n" +
+        "Bidhaa: " + product +
+        "\nQuantity: " + quantity +
+        "\nTotal: TSh " + total.toLocaleString() +
+        "\nFaida: TSh " + profit.toLocaleString()
+    );
+
+    document.getElementById("saleProduct").value = "";
+    document.getElementById("saleQuantity").value = "";
+    document.getElementById("salePrice").value = "";
+    document.getElementById("saleCost").value = "";
+}
