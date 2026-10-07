@@ -307,3 +307,24 @@ document.addEventListener(
 
     }
 );
+// ==========================================
+// JAZA BIDHAA KWENYE NEW SALE
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const productSelect =
+        document.getElementById("saleProduct");
+
+    if (!productSelect) return;
+
+    productSelect.innerHTML = `
+        <option value="">-- Chagua bidhaa --</option>
+        <option value="Faru Dust">Faru Dust</option>
+        <option value="Duduba">Duduba</option>
+        <option value="Blitkill">Blitkill</option>
+        <option value="Nuru">Nuru</option>
+        <option value="Shamba Dust">Shamba Dust</option>
+    `;
+
+});
