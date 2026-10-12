@@ -91,13 +91,28 @@
     <option value="Shamba Dust">Shamba Dust</option>
     </select>
 
-    <div id="saleInfo" style="margin-top:15px;">
-  Bei ya kununua: TSh 0<br>
-  Bei ya reja: TSh 0<br>
-  Faida: TSh 0
-    </div>
+    
+<div id="saleInfo" style="margin-top:15px;">
+    Bei ya kununua: TSh <span id="buyPrice">0</span><br>
+    Bei ya reja: TSh <span id="retailPrice">0</span><br>
+    Faida: TSh <span id="saleProfit">0</span>
+</div>
 
-  <button onclick="newSale()">
+<label for="saleQuantity">Kiasi cha kuuza:</label>
+<input
+    type="number"
+    id="saleQuantity"
+    min="1"
+    value="1"
+    placeholder="Weka kiasi"
+>
+
+<br><br>
+
+<button onclick="newSale()">
+    💰 SELL PRODUCT
+</button>
+    
   </div>
 
   <h2>🧾 Mauzo</h2>
