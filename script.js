@@ -115,7 +115,7 @@ const stockData = {
 function newSale() {
 
     const productElement =
-        document.getElementById("saleProduct");
+    document.getElementById("productSelect");
 
     const quantityElement =
         document.getElementById("saleQuantity");
